@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Created on Mon Mar 29 19:49:36 2021
@@ -18,7 +18,7 @@ def load_lidar_intrinsic_data():
     df = pd.DataFrame()
     lidar_gt = pd.DataFrame()
     for filename in filenames:
-        print "Load lidar intrinsic data from ", filename
+        print("Load lidar intrinsic data from ", filename)
         
         data = pd.read_csv(filename, ',')
         dsr_col = np.abs(np.array(range(16)) - 15)
@@ -41,7 +41,7 @@ def load_lidar_intrinsic_data():
     for idx in range(6):
         lidar_list[idx] = np.array(lidar_list[idx]).T
     
-    print lidar_gt.columns
+    print(lidar_gt.columns)
     return lidar_list, lidar_gt
  
 if __name__ == "__main__":
@@ -55,7 +55,7 @@ if __name__ == "__main__":
     fig, axs = plt.subplots(nrows=2, ncols=3, sharex=True, sharey=False, figsize=(18, 6))
     plt.subplots_adjust(wspace=0.3, hspace=None)
     for idx, y_label, col_y in zip(range(6), ylabels, gt_df.columns):
-        ax = axs[idx/3][idx%3]
+        ax = axs[idx//3][idx%3]
         
         ax.boxplot(est_list[idx])
         ax.plot(gt_df['dsr'],  gt_df[col_y],  'b.', label='groundtruth')

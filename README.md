@@ -68,12 +68,20 @@ After completing calibration, run the following script to check the calibration 
 
 ```python
 cd script
-python plot_lidar_intrinsic_data.py
+python3 plot_lidar_intrinsic_data.py
 ```
 
 ## Observability-Aware Calibration
 
 The code of observability-awared module and the simulator would be released in the near future.
+
+## Comments
+Based on the code, the lidar intrinsic calibration only supports VLP16.
+
+## Calibration of the Lidar-IMU system in HiltiSLAM 2022
+```
+roslaunch oa_licalib li_calib.launch config_path:=/config/hiltislam2022.yaml
+```
 
 ## Credits
 
