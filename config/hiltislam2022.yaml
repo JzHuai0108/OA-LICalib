@@ -1,0 +1,57 @@
+topic_lidar: /hesai/pandar
+topic_imu: /alphasense/imu
+
+LidarModel: Pandar_XT32_points
+vlp16_ring_case: 0  # This parameter configures VLP16 lasers and is only effective when opt_lidar_intrinsic is true.
+
+scan4map: 15.0  # This param seems to have no effect based on the code.
+ndtResolution: 0.5 # 0.5 for indoor case and 1.0 for outdoor case
+ndt_key_frame_downsample: 0.1
+map_downsample_size: 0.25
+
+knot_distance: 0.02
+
+use_gui: false
+
+# 当 segment_num = 1时，即用一段数据标定
+segment_num: 1
+selected_segment:
+  - {start_time: 0, end_time: 45, path_bag: /hiltislam2022/calib_03_2022-03-02-11-27-22.bag}
+
+
+# segment_num: 1
+# selected_segment:
+#  - {start_time: 151, end_time: 177, path_bag: /hiltislam2022/exp01_construction_ground_level.bag}
+
+
+# 平面运动时，旋转外参无法初始化
+plane_motion: false
+
+# optimization weight
+gyro_weight: 2.80  # factor to multiply the gyro measurement residuals
+accel_weight: 1.85
+lidar_weight: 1.0
+
+lock_accel_bias: false
+
+opt_timeoffset: true
+timeoffset_padding: 0.01
+
+opt_lidar_intrinsic: false
+opt_IMU_intrinsic: true
+
+iteration_num: 14  # number of calls of the refinement routine.
+
+# For CalibParamManager
+extrinsic:
+  Trans: [-0.001, -0.00855, 0.055]  # position of lidar in IMU frame
+  Trans_prior: [-0.001, -0.00855, 0.055]  # not used at all.
+  Rot: [ -0.0000000, -1.0000000,  0.0000000,
+         -1.0000000, -0.0000000,  0.0000000,
+          0.0000000,  0.0000000, -1.0000000]   # rotation of lidar relative to IMU frame
+  # Trans: [0.3, 0.15, 0.05]
+
+  # gt [1, 2, 5]deg
+  # Rot: [  0.995588, -0.0871026,  0.0348995,
+  #       0.0877492,    0.99599, -0.0174418,
+  #     -0.0332403,  0.0204272,   0.999239]

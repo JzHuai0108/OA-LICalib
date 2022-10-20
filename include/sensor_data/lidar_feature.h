@@ -42,6 +42,7 @@ enum LidarModelType {
   LIVOX_HORIZON,
   RS_16,
   RS_M1,
+  Pandar_XT32_points,
 };
 
 struct LiDARFeature {

@@ -97,3 +97,22 @@ typedef pcl::PointCloud<OusterPoint> OusterPointCloud;
 
 typedef pcl::PointXYZRGB ColorPoint;
 typedef pcl::PointCloud<ColorPoint> ColorPointCloud;
+
+namespace hesai_ros {
+  struct EIGEN_ALIGN16 Point {
+      PCL_ADD_POINT4D;
+      float intensity;
+      double timestamp;
+      uint16_t ring;
+      EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+  };
+}  // namespace hesai_ros
+
+POINT_CLOUD_REGISTER_POINT_STRUCT(hesai_ros::Point,
+    (float, x, x)
+    (float, y, y)
+    (float, z, z)
+    (float, intensity, intensity)
+    (double, timestamp, timestamp)
+    (uint16_t, ring, ring)
+)

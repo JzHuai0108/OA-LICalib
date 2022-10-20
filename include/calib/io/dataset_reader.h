@@ -43,6 +43,7 @@
 #include <sensor_data/lidar_rs_16.h>
 #include <sensor_data/lidar_vlp_16.h>
 #include <sensor_data/lidar_vlp_points.h>
+#include <sensor_data/lidar_pandar.h>
 
 #include <utils/math_utils.h>
 #include <utils/eigen_utils.hpp>
@@ -141,8 +142,10 @@ class LioDataset {
       p_robosense_convert_ = std::make_shared<RobosenseCorrection>(
           RobosenseCorrection::ModelType::RS_16);
       std::cout << "LiDAR model set as RS_16." << std::endl;
-    }  //
-    else {
+    } else if (lidar_model_ == Pandar_XT32_points) {
+      pandar_point_convert_ = std::make_shared<PandarPoints>(32);
+      std::cout << "LiDAR model set as Pandar XT32." << std::endl;
+    } else {
       std::cout << "LiDAR model " << lidar_model_ << " not support yet."
                 << std::endl;
     }
@@ -229,6 +232,12 @@ class LioDataset {
               m.instantiate<rslidar_msgs::rslidarScan>();
           timestamp = rs_msg->header.stamp.toSec();
           p_robosense_convert_->unpack_scan(rs_msg, lidar_feature);
+        } else if (lidar_model_ == Pandar_XT32_points) {
+          sensor_msgs::PointCloud2::ConstPtr scan_msg =
+              m.instantiate<sensor_msgs::PointCloud2>();
+          timestamp = scan_msg->header.stamp.toSec();
+          pandar_point_convert_->get_organized_and_raw_cloud(scan_msg,
+                                                             lidar_feature);
         }
 
         lidar_feature.time_max = 0;
@@ -408,7 +417,7 @@ class LioDataset {
   VelodynePoints::Ptr vlp_point_convert_;
   OusterLiDAR::Ptr ouster_convert_;
   RobosenseCorrection::Ptr p_robosense_convert_;
-
+  PandarPoints::Ptr pandar_point_convert_;
   LidarModelType lidar_model_;
 };
 
