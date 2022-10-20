@@ -111,8 +111,11 @@ void LICalibrHelper::LoadDataset(const YAML::Node& node) {
     ROS_WARN("LiDAR model %s not support yet.", lidar_model.c_str());
   }
 
+  double max_point_distance = node["max_point_distance"].as<double>();
+  LidarDataOptions options;
+  options.max_point_distance_ = max_point_distance;
   segment_dataset_ =
-      std::make_shared<SegmentDatasetManager>(node, lidar_model_type);
+      std::make_shared<SegmentDatasetManager>(node, lidar_model_type, options);
 
   topic_imu_ = node["topic_imu"].as<std::string>();
   topic_lidar_ = node["topic_lidar"].as<std::string>();

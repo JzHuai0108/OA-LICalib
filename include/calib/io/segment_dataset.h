@@ -47,7 +47,8 @@ class SegmentDatasetManager {
   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
   SegmentDatasetManager(const YAML::Node& node,
-                        const LidarModelType& lidar_model) {
+                        const LidarModelType& lidar_model, 
+                        const LidarDataOptions& options) {
     int segment_num = node["segment_num"].as<int>();
 
     const YAML::Node& segment_node = node["selected_segment"];
@@ -75,7 +76,7 @@ class SegmentDatasetManager {
                 << std::endl;
 
       std::shared_ptr<liso::IO::LioDataset> dataset_reader;
-      dataset_reader = std::make_shared<liso::IO::LioDataset>(lidar_model);
+      dataset_reader = std::make_shared<liso::IO::LioDataset>(lidar_model, options);
       dataset_reader->Read(bag_path, topic_imu, topic_lidar, bag_start,
                            bag_durr);
       dataset_reader->AdjustDatasetTime();

@@ -104,7 +104,8 @@ inline bool loadmsg(const std::string bag_path, const std::string topic,
 
 class LioDataset {
  public:
-  LioDataset(LidarModelType lidar_model) : lidar_model_(lidar_model) {}
+  LioDataset(LidarModelType lidar_model, const LidarDataOptions& options) : 
+      lidar_model_(lidar_model), options_(options) {}
 
   void Init() {
     velodyne16_convert_ = nullptr;
@@ -143,7 +144,7 @@ class LioDataset {
           RobosenseCorrection::ModelType::RS_16);
       std::cout << "LiDAR model set as RS_16." << std::endl;
     } else if (lidar_model_ == Pandar_XT32_points) {
-      pandar_point_convert_ = std::make_shared<PandarPoints>(32);
+      pandar_point_convert_ = std::make_shared<PandarPoints>(32, options_);
       std::cout << "LiDAR model set as Pandar XT32." << std::endl;
     } else {
       std::cout << "LiDAR model " << lidar_model_ << " not support yet."
@@ -419,6 +420,7 @@ class LioDataset {
   RobosenseCorrection::Ptr p_robosense_convert_;
   PandarPoints::Ptr pandar_point_convert_;
   LidarModelType lidar_model_;
+  LidarDataOptions options_;
 };
 
 }  // namespace IO

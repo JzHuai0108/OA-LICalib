@@ -45,6 +45,10 @@ enum LidarModelType {
   Pandar_XT32_points,
 };
 
+struct LidarDataOptions {
+  double max_point_distance_;
+};
+
 struct LiDARFeature {
   LiDARFeature()
       : timestamp(0),

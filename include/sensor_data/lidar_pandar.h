@@ -16,11 +16,12 @@ class PandarPoints {
  public:
   typedef std::shared_ptr<PandarPoints> Ptr;
 
-  PandarPoints(int ring_no)
-      : pandar_ring_No_(ring_no), num_firing_(2000) {
+  PandarPoints(int ring_no, const LidarDataOptions& options)
+      : pandar_ring_No_(ring_no), num_firing_(2000), options_(options) {
       std::string package_name = "oa_licalib";
       std::string PACKAGE_PATH = ros::package::getPath(package_name);
       log_dir_ = PACKAGE_PATH + "/data/bag";
+      ROS_INFO_STREAM("Max point distance " << options.max_point_distance_ << ".");
   }
 
   double RotationTravelledClockwise(double now_angle) const {
@@ -83,7 +84,7 @@ class PandarPoints {
         lastPointRing = h;
 
         double depth = sqrt(src.x * src.x + src.y * src.y + src.z * src.z);
-        if (depth > 60) continue;
+        if (depth > options_.max_point_distance_) continue;
 
         PosPoint dst_point;
         dst_point.x = src.x;
@@ -119,5 +120,6 @@ class PandarPoints {
 
   int num_firing_;
   std::string log_dir_;
+  LidarDataOptions options_;
 };
 }  // namespace liso
