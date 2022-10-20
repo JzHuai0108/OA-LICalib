@@ -24,7 +24,7 @@ endif()
 ## is used, also find other catkin packages
 # set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake_modules/" ${CMAKE_MODULE_PATH})
 #set(EIGEN_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/eigen")
-set(CERES_DIR "${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/build-ceres-slover")
+set(Ceres_DIR "${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/build-ceres-solver")
 
 #find_package(Ceres REQUIRED)
 find_package(Eigen3 REQUIRED)
