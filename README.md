@@ -82,6 +82,8 @@ Based on the code, the lidar intrinsic calibration only supports VLP16.
 ```
 roslaunch oa_licalib li_calib.launch config_path:=/config/hiltislam2022.yaml
 ```
+## Troubleshooting
+If the program crashes in the solve step of the BatchOptimization, make sure the calibration segment has diverse motion.
 
 ## Credits
 

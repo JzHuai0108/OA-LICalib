@@ -10,13 +10,13 @@ ndt_key_frame_downsample: 0.1
 map_downsample_size: 0.25
 
 knot_distance: 0.02
-
+max_point_distance: 30  # ignore far points 
 use_gui: false
 
 # 当 segment_num = 1时，即用一段数据标定
 segment_num: 1
 selected_segment:
-  - {start_time: 0, end_time: 45, path_bag: /hiltislam2022/calib_03_2022-03-02-11-27-22.bag}
+  - {start_time: 105, end_time: 112, path_bag: /hiltislam2022/calib_03_2022-03-02-11-27-22.bag}
 
 
 # segment_num: 1
@@ -40,7 +40,7 @@ timeoffset_padding: 0.01
 opt_lidar_intrinsic: false
 opt_IMU_intrinsic: true
 
-iteration_num: 14  # number of calls of the refinement routine.
+iteration_num: 7  # number of calls of the refinement routine.
 
 # For CalibParamManager
 extrinsic:
