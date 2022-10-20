@@ -52,6 +52,7 @@ find_package(catkin REQUIRED COMPONENTS
     tf_conversions
     ndt_omp
     roslib
+    rslidar_msgs
 )
 
 find_package(OpenCV REQUIRED)

@@ -37,8 +37,11 @@ cd OA-LICalib
 
 ## build
 cd ../..
-catkin_make -DCATKIN_WHITELIST_PACKAGES="ndt_omp"
-catkin_make -DCATKIN_WHITELIST_PACKAGES=""
+# catkin_make -DCATKIN_WHITELIST_PACKAGES="ndt_omp"
+# catkin_make -DCATKIN_WHITELIST_PACKAGES=""
+
+catkin build oa_licalib  # catkin build is recommended
+
 source ./devel/setup.bash
 ```
 
