@@ -109,12 +109,14 @@ class CalibUI : public LICalibrHelper {
     this->BatchOptimization();
     std::cout << "[Paper] First opt costs " << std::fixed
               << std::setprecision(2) << timer.toc() << " ms\n";
-
-    SaveCalibResult(0);
+    std::string calib_result_file =
+        this->cache_path_parent_ + "/simu_calib_result.txt";
+    std::cout << "Saving calib result to " << calib_result_file << ".\n";
+    SaveCalibResult(0, calib_result_file);
 
     for (size_t iter = 1; iter < iteration_num_; iter++) {
       if (iter > 1) {
-//        this->calib_param_manager_->calib_option.opt_lidar_intrinsic = true;  // jhuai: disable this because this is not supported for many lidars.
+        // this->calib_param_manager_->calib_option.opt_lidar_intrinsic = true;  // jhuai: disable this because this is not supported for many lidars.
         this->calib_param_manager_->calib_option.opt_IMU_intrinsic = true;
         this->calib_param_manager_->calib_option.opt_time_offset = true;
       }
@@ -127,7 +129,7 @@ class CalibUI : public LICalibrHelper {
         this->calib_param_manager_->calib_option
             .apply_lidar_intrinstic_to_scan = true;
       }
-      SaveCalibResult(iter);
+      SaveCalibResult(iter, calib_result_file);
     }
   }
 
@@ -151,10 +153,8 @@ class CalibUI : public LICalibrHelper {
     std::cout << "Calibration finished." << std::endl;
   }
 
-  void SaveCalibResult(size_t iteration) {
+  void SaveCalibResult(size_t iteration, const std::string& calib_result_file) {
     std::ofstream outfile;
-    std::string calib_result_file =
-        this->cache_path_parent_ + "/simu_calib_result.txt";
     outfile.open(calib_result_file, std::ios::app);
 
     Eigen::Vector3d p_LinI = this->calib_param_manager_->p_LinI;

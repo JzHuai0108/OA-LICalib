@@ -312,7 +312,9 @@ void LICalibrHelper::BatchOptimization() {
   TrajInitFromSurfel(options);
 
   calib_step_ = BatchOptimizationDone;
-  SaveCalibResult(cache_path_parent_ + "/calib_result.csv");
+  std::string calib_result_file = cache_path_parent_ + "/calib_result.csv";
+  SaveCalibResult(calib_result_file);
+  std::cout << "Saving calib result to " << calib_result_file << ".\n";
 }
 
 void LICalibrHelper::Refinement() {
