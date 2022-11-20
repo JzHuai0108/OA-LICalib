@@ -14,14 +14,14 @@ max_point_distance: 30  # ignore far points
 use_gui: false
 
 # 当 segment_num = 1时，即用一段数据标定
-segment_num: 1
-selected_segment:
-  - {start_time: 105, end_time: 112, path_bag: /hiltislam2022/calib_03_2022-03-02-11-27-22.bag}
-
-
 # segment_num: 1
 # selected_segment:
-#  - {start_time: 151, end_time: 177, path_bag: /hiltislam2022/exp01_construction_ground_level.bag}
+#   - {start_time: 90, end_time: 120, path_bag: /data/hiltislam2022/calib_03_2022-03-02-11-27-22.bag}
+
+
+segment_num: 1
+selected_segment:
+ - {start_time: 157, end_time: 171, path_bag: /data/hiltislam2022/exp01_construction_ground_level.bag}
 
 
 # 平面运动时，旋转外参无法初始化
