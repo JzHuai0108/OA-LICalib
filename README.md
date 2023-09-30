@@ -40,7 +40,7 @@ cd ../..
 # catkin_make -DCATKIN_WHITELIST_PACKAGES="ndt_omp"
 # catkin_make -DCATKIN_WHITELIST_PACKAGES=""
 
-catkin build oa_licalib  # catkin build is recommended
+catkin build oa_licalib -DPYTHON_EXECUTABLE=/usr/bin/python3 # catkin build is recommended
 
 source ./devel/setup.bash
 ```
